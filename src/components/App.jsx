@@ -21,6 +21,7 @@ export class App extends Component {
       if (savedContacts) {
         // Check if the retrieved data is valid JSON
         const parsedContacts = JSON.parse(savedContacts);
+        
 
         // Check if parsedContacts is an array before setting state
         if (Array.isArray(parsedContacts)) {
@@ -29,11 +30,13 @@ export class App extends Component {
           console.error(
             'Invalid data format in localStorage. Expected an array.'
           );
+          
         }
       }
     } catch (error) {
       console.error('Error retrieving contacts from localStorage:', error);
     }
+    
   }
 
   componentDidUpdate(_prevProps, prevState) {
