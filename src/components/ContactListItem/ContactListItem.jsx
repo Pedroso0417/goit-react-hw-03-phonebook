@@ -15,8 +15,8 @@ const ContactListItem = ({ contact, onDelete }) => {
 };
 
 ContactListItem.propTypes = {
-  filteredContact: PropTypes.object.isRequired,
-  deleteContact: PropTypes.func.isRequired,
+  contact: PropTypes.object.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
 export default ContactListItem;
