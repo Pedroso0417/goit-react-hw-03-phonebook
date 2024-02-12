@@ -1,9 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import css from './ContactList.module.css';
-export const ContactList = ({ filterContact, deleteContact }) => {
-  const filteredContacts = filterContact();
-
+export const ContactList = ({ filteredContacts, deleteContact }) => {
   return (
     <ul className={css.filterContact}>
       {filteredContacts.map(contact => (
@@ -22,6 +20,6 @@ export const ContactList = ({ filterContact, deleteContact }) => {
 };
 
 ContactList.propTypes = {
-  filterContact: PropTypes.func.isRequired,
+  filteredContacts: PropTypes.func.isRequired,
   deleteContact: PropTypes.func.isRequired,
 };

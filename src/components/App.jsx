@@ -14,6 +14,41 @@ export class App extends Component {
     filter: '',
   };
 
+  componentDidMount() {
+    try {
+      const savedContacts = localStorage.getItem('contacts');
+
+      if (savedContacts) {
+        // Check if the retrieved data is valid JSON
+        const parsedContacts = JSON.parse(savedContacts);
+
+        // Check if parsedContacts is an array before setting state
+        if (Array.isArray(parsedContacts)) {
+          this.setState({ contacts: parsedContacts });
+        } else {
+          console.error(
+            'Invalid data format in localStorage. Expected an array.'
+          );
+        }
+      }
+    } catch (error) {
+      console.error('Error retrieving contacts from localStorage:', error);
+    }
+  }
+
+  componentDidUpdate(_prevProps, prevState) {
+    const { contacts } = this.state;
+
+    if (contacts !== prevState.contacts) {
+      try {
+        // Serialize the contacts array to JSON before storing in localStorage
+        localStorage.setItem('contacts', JSON.stringify(contacts));
+      } catch (error) {
+        console.error('Error saving contacts to localStorage:', error);
+      }
+    }
+  }
+
   addContact = newContact => {
     this.setState(prevState => ({
       contacts: [...prevState.contacts, newContact],
@@ -41,16 +76,21 @@ export class App extends Component {
   };
 
   render() {
-    const { contacts, filter } = this.state;
+    const { filter } = this.state;
+    const filteredContacts = this.filterContact(); // Add this line to get filtered contacts
+
     return (
       <div>
         <h1>Phonebook</h1>
-        <ContactForm addContact={this.addContact} contacts={contacts} />
+        <ContactForm
+          addContact={this.addContact}
+          contacts={this.state.contacts}
+        />
 
         <h2>Contacts</h2>
         <Filter filter={filter} setFilter={this.setFilter} />
         <ContactList
-          filterContact={this.filterContact}
+          filteredContacts={filteredContacts} // Pass the filtered contacts to ContactList
           deleteContact={this.deleteContact}
         />
       </div>
