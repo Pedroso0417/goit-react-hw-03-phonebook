@@ -1,0 +1,30 @@
+.formSubmit {
+  display: block;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 300px;
+  border: 1px solid #2a2a2a;
+  gap: 12px;
+  margin: 30px 0;
+  margin-left: 16px;
+  margin-top: 12px;
+}
+
+.formLabel {
+  font-size: 20px;
+  margin-left: 16px;
+}
+
+.formInput {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 16px;
+}
+
+.submit {
+  width: 100px;
+  margin-left: 16px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
